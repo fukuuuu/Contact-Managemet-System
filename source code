@@ -5,12 +5,12 @@
 int main()
 {
     int ch;  // choices
-    
-    system("cls");    // main menu
+
+    system("cls");    
 
     printf("\n\t **** Welcome to Contact Management System ****");
 
-    main:
+    main:  // main menu
 
     printf("\n_________________________________________________________________");
 
@@ -26,7 +26,6 @@ int main()
     switch(ch)
     {
         case 0:
-
             printf("\n\t\tExiting the program...?");
             break;
     }
@@ -40,18 +39,14 @@ int main()
 
     {
         case 1:
-
             goto main;
 
         case 0:
-
             printf("Exit the program");
             break;
 
         default:
-
             printf("Invalid choice");
-
             break;
     }
     return 0;
