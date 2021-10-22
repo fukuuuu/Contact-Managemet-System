@@ -48,7 +48,7 @@ int main()
 
             system("cls");
 
-            fp=fopen("contact.dll","a");
+            fp=fopen("contact.dll", "a");
 
             for (;;)
 
@@ -59,7 +59,7 @@ int main()
 
                 scanf("%[^\n]", &list.name);
 
-                if(stricmp(list.name,"")==0 || stricmp(list.name," ")==0)
+                if(stricmp(list.name, "")==0 || stricmp(list.name, " ")==0)
 
                     break;
 
@@ -83,7 +83,7 @@ int main()
 
                 printf("\n");
 
-                fwrite(&list,sizeof(list),1,fp);
+                fwrite(&list, sizeof(list), 1, fp);
 
             }
 
@@ -91,7 +91,9 @@ int main()
 
             break;
     }
-
+	
+	main2:
+	
     printf("\n\n\t\t[1] Main Menu\t[0] Exit\n");
     printf("\n\nEnter choice:");
 
@@ -108,8 +110,8 @@ int main()
                 break;
 
                 default:
-                    printf("Invalid choice");
-                    break;
+                    printf("Invalid choice, Please choose only [0] or [1]]");
+                    goto main2;
     }
     return 0;
 }
