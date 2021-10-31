@@ -23,7 +23,8 @@ int main()
     main:  // main menu
     printf("\n_________________________________________________________________");
     printf("\n\n\t\t\tMAIN MENU\n\t\t==========================");
-    printf("\n\t\t[1] Add a new Contact\n\t\t[2] List all Contacts\n\t\t[3] Search for contact\n\t\t[4] Edit a Contact\n\t\t[5] Delete a Contact\n\t\t[0] Exit");
+    printf("\n\t\t[1] Add a new Contact\n\t\t[2] List all Contacts\n\t\t[3] Search for contact\n\t\t[4] Edit a Contact\n\t\t");
+    printf("[5] Delete a Contact\n\t\t[0] Exit");
     printf("\n\t\t==========================\n\t\t");
     printf("\n_________________________________________________________________");
     printf("\n\nEnter the choice:");
@@ -94,7 +95,7 @@ int main()
             }
             break;
     }
-    
+
     main2:
     printf("\n\n\t\t  ..::Enter the Choice::..\n\n\t\t[1] Main Menu\t    [0] Exit\n");
     scanf("%d", &ch);
