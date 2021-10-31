@@ -34,6 +34,7 @@ int main()
         case 0:
             printf("\n\n\t\tAre you sure you want to exit?");
             break;
+
         case 1:  // add a new contact
             system("cls");
             fp=fopen("contact.dll","a"); //append file contact.dll
@@ -62,6 +63,31 @@ int main()
             fclose(fp);
             break;
 
+        case 2:  // list all contacts alphabetically
+            system("cls");
+            printf("\n\t\t================================\n\t\t\tLIST OF CONTACTS\n\t\t================================\n\nName\t\tPhone No\t    Address\t\tE-mail ad.\n=================================================================\n\n");
+            for(i=97; i<=122; i=i+1)  // loop to print alphabetically
+            {
+                fp=fopen("contact.dll", "r");
+                fflush(stdin);
+                found=0;
+
+                while(fread(&list, sizeof(list), 1, fp)==1) // read till end of file, (if sizeof the file == 1 byte do, if not break)
+                {                  
+                    if(list.name[0]==i || list.name[0]==i-32) // print alphabetically
+                    {
+                        printf("\nName\t: %s\nPhone\t: %ld\nAddress\t: %s\nEmail\t: %s\n",list.name,list.ph,list.add,list.email);
+                        found++;
+                    }
+                }
+
+                if(found!=0)
+                {                                                          
+                    printf("=========================================================== [%c]-(%d)\n\n", i-32, found);
+                }
+                fclose(fp);
+            }
+            break;
 	
 	main2:
 	
