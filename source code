@@ -5,35 +5,26 @@
 #include<process.h>
 
 struct contact
-    {
-        long ph;
-
-        char name[20], add[20], email[30];
-
-    } list;
+{
+    long ph;
+    char name[50], add[100], email[100];
+} list;
 
 char query[20],name[20];
-
 FILE *fp, *ft;
-
-int i,ch,found;
-
+int i, n, ch, l, found;
 
 int main()
 {
-
-    system("cls");
-
+    system("cls"); //clear screen
     printf("\n\t **** Welcome to Contact Management System ****");
-
+    
     main:  // main menu
-
     printf("\n_________________________________________________________________");
     printf("\n\n\t\t\tMAIN MENU\n\t\t==========================");
     printf("\n\t\t[1] Add a new Contact\n\t\t[2] List all Contacts\n\t\t[3] Search for contact\n\t\t[4] Edit a Contact\n\t\t[5] Delete a Contact\n\t\t[0] Exit");
     printf("\n\t\t==========================\n\t\t");
     printf("\n_________________________________________________________________");
-
     printf("\n\nEnter the choice:");
 
     scanf("%d", &ch);
@@ -41,56 +32,36 @@ int main()
     switch(ch)
     {
         case 0:
-            printf("\n\t\tExiting the program...?");
+            printf("\n\n\t\tAre you sure you want to exit?");
             break;
-
-            case 1:  // add a new contact
-
+        case 1:  // add a new contact
             system("cls");
-
-            fp=fopen("contact.dll", "a");
-
+            fp=fopen("contact.dll","a"); //append file contact.dll
             for (;;)
-
             {
                 fflush(stdin);
-
                 printf("To exit enter blank space in the name input\nName (Use identical):");
-
                 scanf("%[^\n]", &list.name);
 
-                if(stricmp(list.name, "")==0 || stricmp(list.name, " ")==0)
-
+                if(stricmp(list.name,"")==0 || stricmp(list.name," ")==0)
                     break;
 
                 fflush(stdin);
-
                 printf("Phone:");
-
                 scanf("%ld", &list.ph);
-
                 fflush(stdin);
-
                 printf("address:");
-
                 scanf("%[^\n]", list.add);
-
                 fflush(stdin);
-
                 printf("email address:");
-
                 gets(list.email);
-
                 printf("\n");
-
-                fwrite(&list, sizeof(list), 1, fp);
+                fwrite(&list,sizeof(list),1,fp);
 
             }
-
             fclose(fp);
-
             break;
-    }
+
 	
 	main2:
 	
