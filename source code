@@ -42,7 +42,7 @@ int main()
             fp=fopen("contact.dll", "a"); //append file contact.dll
             for (;;)  // infinite loop
             {
-                fflush(stdin);  // flush the the previous input
+                fflush(stdin);  // flush the the previous input whetther from inside or outside from the loop
                 printf("To exit enter blank space in the name input\nName (Use identical):");
                 scanf("%[^\n]", list.name);
 
@@ -72,17 +72,17 @@ int main()
             system("cls");
             printf("\n\t\t================================\n\t\t\tLIST OF CONTACTS\n\t\t================================\n\n");
             printf("Name\t\tPhone No\t    Address\t\tE-mail ad.\n=================================================================\n\n");
-            for(i=97; i<=122; i=i+1)  // loop to print alphabetically
+            for(i=97; i<=122; i=i+1)  // loop to print alphabetically starts form 'a'
             {
                 fp=fopen("contact.dll", "r");
                 fflush(stdin);
-                found=0;
+                found=0;  // tells how many datas starting with the same letter (starts with 0)
 
                 while(fread(&list, sizeof(list), 1, fp)==1) // read till end of file, (if sizeof the file == 1 byte do, if not break)
                 {                  
                     if(list.name[0]==i || list.name[0]==i-32) // print alphabetically
                     {
-                        printf("\nName\t: %s\nPhone\t: %s\nAddress\t: %s\nEmail\t: %s\n",list.name,list.ph,list.add,list.email);
+                        printf("\nName\t: %s\nPhone\t: %s\nAddress\t: %s\nEmail\t: %s\n", list.name, list.ph, list.add, list.email);
                         found++;
                     }
                 }
