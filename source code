@@ -95,45 +95,45 @@ int main()
             }
             break;
         
-            case 4: // the principle of this case is; 1st I check if the in put is the same with some data in the file, if the latter and the former
-            system("cls"); // is not similar, so I kinda write it on temp(orary) file and so on, and then delete the old contact file, and rename temp
-            fp=fopen("contact.dll", "r"); // file to contact, in short im not rewriting the file but create a new one instead
-            ft=fopen("temp.dat", "w");
-            fflush(stdin);
+        case 4: // the principle of this case is; 1st I check if the in put is the same with some data in the file, if the latter and the former
+        system("cls"); // is not similar, so I kinda write it on temp(orary) file and so on, and then delete the old contact file, and rename temp
+        fp=fopen("contact.dll", "r"); // file to contact, in short im not rewriting the file but create a new one instead
+        ft=fopen("temp.dat", "w");
+        fflush(stdin);
 
-            printf("..::Edit contact\n===============================\n\n\t..::Enter the name of contact to edit:");
-            scanf("%[^\n]", name);
+        printf("..::Edit contact\n===============================\n\n\t..::Enter the name of contact to edit:");
+        scanf("%[^\n]", name);
 
-            while(fread(&list, sizeof(list), 1, fp)==1) // while not EOF
-            {
-                if(stricmp(name, list.name)!=0)  // check if the str are similar or not, if they are
-                    fwrite(&list, sizeof(list), 1, ft);  // write it in the temp file
-            }
+        while(fread(&list, sizeof(list), 1, fp)==1) // while not EOF
+        {
+            if(stricmp(name, list.name)!=0)  // check if the str are similar or not, if they are
+                fwrite(&list, sizeof(list), 1, ft);  // write it in the temp file
+        }
 
-            fflush(stdin); // these are the the normal input
-            printf("\n\n..::Editing '%s'\n\n",name);
-            printf("..::Name(Use identical):");
-            scanf("%[^\n]",list.name);
+        fflush(stdin); // these are the the normal input
+        printf("\n\n..::Editing '%s'\n\n",name);
+        printf("..::Name(Use identical):");
+        scanf("%[^\n]",list.name);
 
-            fflush(stdin);
-            printf("..::Phone:");
-            scanf("%[^\n]", list.ph);
+        fflush(stdin);
+        printf("..::Phone:");
+        scanf("%[^\n]", list.ph);
 
-            fflush(stdin);
-            printf("..::address:");
-            scanf("%[^\n]", list.add);
-            
-            fflush(stdin);
-            printf("..::email address:");
-            gets(list.email);
-            printf("\n");
-            fwrite(&list, sizeof(list), 1, ft);
-            fclose(fp);
-            fclose(ft);
+        fflush(stdin);
+        printf("..::address:");
+        scanf("%[^\n]", list.add);
+        
+        fflush(stdin);
+        printf("..::email address:");
+        gets(list.email);
+        printf("\n");
+        fwrite(&list, sizeof(list), 1, ft);
+        fclose(fp);
+        fclose(ft);
 
-            remove("contact.dll"); // remove the old contact file
-            rename("temp.dat","contact.dll"); // create the new one
-            break;
+        remove("contact.dll"); // remove the old contact file
+        rename("temp.dat","contact.dll"); // create the new one
+        break;
     }
 
     main2: // secondary main
