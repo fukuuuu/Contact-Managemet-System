@@ -134,6 +134,16 @@ int main()
         remove("contact.dll"); // remove the old contact file
         rename("temp.dat","contact.dll"); // create the new one
         break;
+        
+        case 5:
+            system("cls")
+            
+            fflush(stdin);
+            printf("\n\n\t..::DELETE A CONTACT\n\t==========================\n\t..::Enter the name of contact to delete:");
+            scanf("%[^\n]",&name);
+            
+            fp=fopen("contact.dll","r");
+            ft=fopen("temp.dat","w");
     }
 
     main2: // secondary main
