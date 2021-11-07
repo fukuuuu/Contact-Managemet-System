@@ -154,6 +154,10 @@ int main()
             remove("contact.dll");
             rename("temp.dat","contact.dll");
             break;
+         
+         default:
+            printf("Invalid choice");
+            break;
 
     }
 
