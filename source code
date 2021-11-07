@@ -62,7 +62,7 @@ int main()
                 gets(list.email);
 
                 printf("\n");
-                fwrite(&list, sizeof(list), 1, fp);
+                fwrite(&list, sizeof(list), 1, fp); // fwrite(&var, size, n, fp)
 
             }
             fclose(fp);
