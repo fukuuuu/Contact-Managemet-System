@@ -130,6 +130,18 @@ int main()
                     }
                 }
                 
+                if(found==0)
+                    printf("\n..::No match found!");
+                else
+                    printf("\n..::%d match(s) found!",found);
+
+                fclose(fp);
+                printf("\n ..::Try again?\n\n\t[1] Yes\t\t[0] No\n\t");
+                scanf("%d",&ch);
+             
+            } while(ch==1);
+            break;
+            
         
         case 4: // the principle of this case is; 1st I check if the in put is the same with some data in the file, if the latter and the former
         system("cls"); // is not similar, so I kinda write it on temp(orary) file and so on, and then delete the old contact file, and rename temp
