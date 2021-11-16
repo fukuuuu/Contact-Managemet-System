@@ -188,22 +188,21 @@ int main()
             /* ********************delete contacts**********************/
 
         case 5:
-            system("cls");
-            
+            system("cls");       
             fflush(stdin);
             printf("\n\n\t..::DELETE A CONTACT\n\t==========================\n\t..::Enter the name of contact to delete:");
             scanf("%[^\n]",&name);
-
-            fp=fopen("contact.dll","r");
-            ft=fopen("temp.dat","w");
-
-            while(fread(&list, sizeof(list), 1, fp)!=0)
-                if (stricmp(name,list.name)!=0)
-                    fwrite(&list,sizeof(list),1,ft);
-
-            fclose(fp);
-            fclose(ft);
-            remove("contact.dll");
+            
+            fp=fopen("contact.dll","r"); // open the contract.dll to read
+            ft=fopen("temp.dat","w"); // open the temp.dat to write 
+            
+            while(fread(&list,sizeof(list),1,fp)!=0) // If while loop didn't detect the EOF or NULL it will go next to if condition
+               if (stricmp(name,list.name)!=0) // This condition will compare string by string between name and list.name if it is the same name it will not write in the temp.dat   
+                   fwrite(&list,sizeof(list),1,ft);
+            
+            fclose(fp); // close fp
+            fclose(ft); // close ft
+            remove("contact.dll"); 
             rename("temp.dat","contact.dll");
             break;
 
