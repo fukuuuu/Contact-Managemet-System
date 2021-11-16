@@ -1,8 +1,6 @@
 #include<stdio.h>  // input/output
 #include<conio.h> //console input
 #include<string.h> // stricmp
-#include<process.h>
-#include<stdlib.h>
 #include<dos.h>
 
 struct contact
@@ -152,45 +150,45 @@ int main()
         
         //..::note::.. .dat is a file that especially creaated for the program for a specific task in this case I name the file to temp(temporary).dat
         case 4: // the principle of this case is; 1st I check if the in put is the same with some data in struct, if
-        system("cls"); // they are not similar, so I kinda write it(struct list) on temp(orary) file and so on,
-        fp=fopen("contact.dll", "r"); // file to contact, in short im not rewriting the file but create a new one instead
-        ft=fopen("temp.dat", "w");// but if they are similar(name(I want to edit) with some contact in struct), then I edit the contact and write it to temp
-        fflush(stdin); //and then delete the old contact file, and rename temp.dat to contact.dll
+            system("cls"); // they are not similar, so I kinda write it(struct list) on temp(orary) file and so on,
+            fp=fopen("contact.dll", "r"); // file to contact, in short im not rewriting the file but create a new one instead
+            ft=fopen("temp.dat", "w");// but if they are similar(name(I want to edit) with some contact in struct), then I edit the contact and write it to temp
+            fflush(stdin); //and then delete the old contact file, and rename temp.dat to contact.dll
 
-        printf("..::Edit contact\n===============================\n\n\t..::Enter the name of contact to edit:");
-        scanf("%[^\n]", name);
+            printf("..::Edit contact\n===============================\n\n\t..::Enter the name of contact to edit:");
+            scanf("%[^\n]", name);
 
-        while(fread(&list, sizeof(list), 1, fp)==1) // while not EOF
-        {
-            if(stricmp(name, list.name)!=0)  // cif name != list.name
-                fwrite(&list, sizeof(list), 1, ft);  // write list.name in the temp file
-        }
+            while(fread(&list, sizeof(list), 1, fp)==1) // while not EOF
+            {
+                if(stricmp(name, list.name)!=0)  // cif name != list.name
+                    fwrite(&list, sizeof(list), 1, ft);  // write list.name in the temp file
+            }
 
-        fflush(stdin); // these are the the normal input
-        printf("\n\n..::Editing '%s'\n\n",name);
-        printf("..::Name(Use identical):");
-        scanf("%[^\n]", list.name);
+            fflush(stdin); // these are the the normal input
+            printf("\n\n..::Editing '%s'\n\n",name);
+            printf("..::Name(Use identical):");
+            scanf("%[^\n]", list.name);
 
-        fflush(stdin);
-        printf("..::Phone:");
-        scanf("%[^\n]", list.ph);
+            fflush(stdin);
+            printf("..::Phone:");
+            scanf("%[^\n]", list.ph);
 
-        fflush(stdin);
-        printf("..::address:");
-        scanf("%[^\n]", list.add);
-        
-        fflush(stdin);
-        printf("..::email address:");
-        scanf("%[^\n]", list.email);
-        printf("\n");
+            fflush(stdin);
+            printf("..::address:");
+            scanf("%[^\n]", list.add);
+            
+            fflush(stdin);
+            printf("..::email address:");
+            scanf("%[^\n]", list.email);
+            printf("\n");
 
-        fwrite(&list, sizeof(list), 1, ft);
-        fclose(fp);
-        fclose(ft);
+            fwrite(&list, sizeof(list), 1, ft);
+            fclose(fp);
+            fclose(ft);
 
-        remove("contact.dll"); // remove the old contact file
-        rename("temp.dat","contact.dll"); // create the new one
-        break;
+            remove("contact.dll"); // remove the old contact file
+            rename("temp.dat","contact.dll"); // create the new one
+            break;
         
         case 5:
             system("cls");       
@@ -211,14 +209,13 @@ int main()
             rename("temp.dat","contact.dll");
             break;
          
-         default:
+        default:
             printf("Invalid choice");
             break;
     }
     main2: // secondary main
     printf("\n\n\t\t  ..::Enter the Choice::..\n\n\t\t[1] Main Menu\t    [0] Exit\n");
     scanf("%d", &ch);
-
     switch (ch)
     {
         case 0:
