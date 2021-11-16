@@ -1,7 +1,7 @@
-#include<stdio.h>  // input/output
-#include<conio.h> //console input
-#include<string.h> // stricmp
-#include<dos.h>
+#include<stdio.h>  // input/output, printf/scanf
+#include<conio.h> //console input putchar, getch
+#include<string.h> // strcmp
+
 
 struct contact
 {
