@@ -59,11 +59,10 @@ int main()
 
                 fflush(stdin);
                 printf("email address:");
-                gets(list.email);
+                scanf("%[^\n]", list.email);
 
                 printf("\n");
                 fwrite(&list, sizeof(list), 1, fp); // fwrite(&var, size, n, fp)
-
             }
             fclose(fp);
             break;
@@ -72,13 +71,14 @@ int main()
             system("cls");
             printf("\n\t\t================================\n\t\t\tLIST OF CONTACTS\n\t\t================================\n\n");
             printf("Name\t\tPhone No\t    Address\t\tE-mail ad.\n=================================================================\n\n");
-            for(i=97; i<=122; i=i+1)  // loop to print alphabetically starts form 'a'
+            for(i=97; i<=122; i=i+1)  // loop to print alphabetically starting form 'a'
             {
                 fp=fopen("contact.dll", "r");
                 fflush(stdin);
-                found=0;  // tells how many datas starting with the same letter (starts with 0)
+                found=0;  // tells how many datas starting with the same letter (starts with found = 0)
 
-                while(fread(&list, sizeof(list), 1, fp)==1) // read till end of file, (if sizeof the file == 1 byte do, if not break)
+                // read till end of file, (when not error, fread returns a num which is not 0, but it returns 0 or 'NULL' when EOF or error)
+                while(fread(&list, sizeof(list), 1, fp)==1) 
                 {                  
                     if(list.name[0]==i || list.name[0]==i-32) // print alphabetically
                     {
@@ -99,34 +99,41 @@ int main()
             system("cls");
 
             do
-            {
-                found=0;
+            {               
+                found=0;  // tells how many contacts found
                 printf("\n\n\t..::CONTACT SEARCH\n\t===========================\n\t..::Name of contact to search: ");
                 fflush(stdin);
                 scanf("%[^\n]", &query);
 
                 l=strlen(query);
-                fp=fopen("contact.dll","r");
+                fp=fopen("contact.dll","r"); // open contact.dll to read
                 system("cls");
                 printf("\n\n..::Search result for '%s' \n===================================================\n",query);
 
-                while(fread(&list,sizeof(list),1,fp)==1)
+                // nested loop
+                while(fread(&list,sizeof(list),1,fp)==1) // if fread doesn't return 0, it means that the file is neither error or EOF
                 {
-                    for(i=0; i<=l; i++)
+                    for(i=0; i<=l; i++)  // loop to copy each char in struct(list.name) to a new var called name depending on query
                         name[i]=list.name[i];
 
+                    /* make the last char to be NULL to prevent errors and some strange looking char, because
+                    the program did not copy 'NULL' from the previous for loop */
                     name[l]='\0';
+                    /* ..::note::.. I don't use if(stricmp(list.name, query)==0) because for this algo, I have to searh the entire name inorder to searh
+                    for a contact, and thats not convenient, so I decided to use for loop so that I can searh anything I want it could be a char of smth else
+                    ant all of the contacts related to query(my input) will pop up
 
-                    if(stricmp(name,query)==0)
+                    strcmp returns 0 when str1 = str2, I- when str1 < str2 and I+ when str1 > str2*/
+                    if(stricmp(name,query)==0) // if strcmp == 0 (str1 = str2), do the expression
                     {
                         printf("\n..::Name\t: %s\n..::Phone\t: %ld\n..::Address\t: %s\n..::Email\t: %s\n",list.name,list.ph,list.add,list.email);
-                        found++;
+                        found++; // once a contact is found, 'found'++
 
-                        if (found%4==0)
+                        if (found%4==0) // once the user found contacts, only 4 contacts can be shown in the console(can not be greater than 4)
                         {
-                            printf("..::Press any key to continue...");
-                            getch();
-                        }
+                            printf("..::Press any key to continue..."); // press any key to show more
+                            getch(); // get a char (any char)
+                        } 
                     }
                 }
                 
@@ -139,22 +146,24 @@ int main()
                 printf("\n ..::Try again?\n\n\t[1] Yes\t\t[0] No\n\t");
                 scanf("%d",&ch);
              
-            } while(ch==1);
+            } while(ch==1); // do while, if user inout == 1, then go back to do the entire loop again, if not, then break
             break;
-   
-        case 4: // the principle of this case is; 1st I check if the in put is the same with some data in the file, if the latter and the former
-        system("cls"); // is not similar, so I kinda write it on temp(orary) file and so on, and then delete the old contact file, and rename temp
+
+        
+        //..::note::.. .dat is a file that especially creaated for the program for a specific task in this case I name the file to temp(temporary).dat
+        case 4: // the principle of this case is; 1st I check if the in put is the same with some data in struct, if
+        system("cls"); // they are not similar, so I kinda write it(struct list) on temp(orary) file and so on,
         fp=fopen("contact.dll", "r"); // file to contact, in short im not rewriting the file but create a new one instead
-        ft=fopen("temp.dat", "w");
-        fflush(stdin);
+        ft=fopen("temp.dat", "w");// but if they are similar(name(I want to edit) with some contact in struct), then I edit the contact and write it to temp
+        fflush(stdin); //and then delete the old contact file, and rename temp.dat to contact.dll
 
         printf("..::Edit contact\n===============================\n\n\t..::Enter the name of contact to edit:");
         scanf("%[^\n]", name);
 
         while(fread(&list, sizeof(list), 1, fp)==1) // while not EOF
         {
-            if(stricmp(name, list.name)!=0)  // check if the str are similar or not, if they are
-                fwrite(&list, sizeof(list), 1, ft);  // write it in the temp file
+            if(stricmp(name, list.name)!=0)  // cif name != list.name
+                fwrite(&list, sizeof(list), 1, ft);  // write list.name in the temp file
         }
 
         fflush(stdin); // these are the the normal input
@@ -172,8 +181,9 @@ int main()
         
         fflush(stdin);
         printf("..::email address:");
-        gets(list.email);
+        scanf("%[^\n]", list.email);
         printf("\n");
+        
         fwrite(&list, sizeof(list), 1, ft);
         fclose(fp);
         fclose(ft);
