@@ -78,7 +78,7 @@ int main()
                 found=0;  // tells how many datas starting with the same letter (starts with found = 0)
 
                 // read till end of file, (when not error, fread returns a num which is not 0, but it returns 0 or 'NULL' when EOF or error)
-                while(fread(&list, sizeof(list), 1, fp)==1) 
+                while(fread(&list, sizeof(list), 1, fp)!=0) 
                 {                  
                     if(list.name[0]==i || list.name[0]==i-32) // print alphabetically
                     {
