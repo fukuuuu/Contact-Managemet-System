@@ -221,12 +221,13 @@ int main()
         case 0:
             printf("Exit the program\n");
             break;
-            default:
-                printf("Invalid choice, Please choose only [0] or [1]\n");
-                goto main2;
         case 1:
             system("cls");
-            goto main;      
+            goto main;
+        default:
+            printf("Invalid choice, Please choose only [0] or [1]\n");
+            goto main2;
+            break;
     }
     return 0;
 }
